@@ -116,9 +116,9 @@ Simple web interface where users input medical data and get instant prediction.
 
 Simple web interface where users input medical data and get instant prediction.
 
-![Heart Disease UI Preview]("C:\Users\samar\Downloads\input.png")
+![Heart Disease UI Preview](input.png)
 
-![Heart Disease UI Preview]("C:\Users\samar\Downloads\output.png")
+![Heart Disease UI Preview](output.png)
 
 ---
 ---
