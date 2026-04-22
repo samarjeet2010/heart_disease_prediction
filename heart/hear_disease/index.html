@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heart Disease Prediction</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #9ec121;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 340px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 6px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        #result {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .risk { color: red; }
+        .safe { color: green; }
+
+        .accuracy-box {
+            margin-top: 15px;
+            padding: 10px;
+            background: #eef2ff;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        .accuracy-box p {
+            margin: 4px 0;
+        }
+
+        .title-small {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Heart Disease Prediction</h2>
+
+    <input id="age" placeholder="Age">
+    <input id="sex" placeholder="Sex (0=F,1=M)">
+
+    <!-- Chest Pain -->
+    <select id="cp">
+        <option value="">Chest Pain</option>
+        <option value="0">Typical angina</option>
+        <option value="1">Atypical angina</option>
+        <option value="2">Non-anginal pain</option>
+        <option value="3">Asymptomatic</option>
+    </select>
+
+    <input id="bp" placeholder="BP">
+    <input id="chol" placeholder="Cholesterol">
+
+    <!-- FBS -->
+    <select id="fbs">
+        <option value="">Fasting Blood Sugar</option>
+        <option value="0">Normal</option>
+        <option value="1">High (>120 mg/dl)</option>
+    </select>
+
+    <!-- Rest ECG -->
+    <select id="restecg">
+        <option value="">Rest ECG</option>
+        <option value="0">Normal</option>
+        <option value="1">Abnormal</option>
+        <option value="2">Serious Abnormality</option>
+    </select>
+
+    <input id="thalach" placeholder="Max Heart Rate">
+
+    <!-- Exercise Angina -->
+    <select id="exang">
+        <option value="">Exercise Angina</option>
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+    </select>
+
+    <input id="oldpeak" placeholder="Oldpeak">
+
+    <button onclick="predict()">Predict</button>
+
+    <div id="result"></div>
+
+    <div class="accuracy-box" id="accuracyBox" style="display:none;">
+        <div class="title-small">Model Accuracy</div>
+        <p>🌳 Random Forest: <span id="rf"></span></p>
+        <p>📈 Logistic Regression: <span id="lr"></span></p>
+        <p>⚡ Gradient Boosting: <span id="gb"></span></p>
+    </div>
+</div>
+
+<script>
+async function predict() {
+    try {
+        const res = await fetch(
+            "http://127.0.0.1:8000/predict?age=" + age.value +
+            "&sex=" + sex.value +
+            "&cp=" + cp.value +
+            "&trestbps=" + bp.value +
+            "&chol=" + chol.value +
+            "&fbs=" + fbs.value +
+            "&restecg=" + restecg.value +
+            "&thalach=" + thalach.value +
+            "&exang=" + exang.value +
+            "&oldpeak=" + oldpeak.value,
+            {
+                method: "POST"
+            }
+        );
+
+        const data = await res.json();
+
+        let resultElement = document.getElementById("result");
+
+        if (data.prediction == 1) {
+            resultElement.innerText = "⚠️ Heart Disease Risk";
+            resultElement.className = "risk";
+        } else {
+            resultElement.innerText = "✅ No Heart Disease";
+            resultElement.className = "safe";
+        }
+
+        document.getElementById("accuracyBox").style.display = "block";
+        document.getElementById("rf").innerText = data.rf_accuracy + "%";
+        document.getElementById("lr").innerText = data.lr_accuracy + "%";
+        document.getElementById("gb").innerText = data.gb_accuracy + "%";
+
+    } catch (error) {
+        document.getElementById("result").innerText = "❌ API Error";
+    }
+}
+</script>
+
+</body>
+</html>
