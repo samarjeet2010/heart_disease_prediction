@@ -97,6 +97,12 @@ POST http://127.0.0.1:8000/predict
 ---
 
 ## 📊 Output
+<img width="1886" height="920" alt="image" src="https://github.com/user-attachments/assets/32ae9c71-863a-4307-b8a1-2a305329e54a" />
+
+<img width="1898" height="927" alt="image" src="https://github.com/user-attachments/assets/e64a2ef2-1457-401f-a363-717fccaf8e4b" />
+
+
+
 
 * ✅ No Heart Disease
 * ⚠️ Heart Disease Risk
@@ -121,13 +127,10 @@ Also shows:
 
 
 Simple web interface where users input medical data and get instant prediction.
-## 📸 UI Preview
 
 Simple web interface where users input medical data and get instant prediction.
 
-![Heart Disease UI Preview](![Input Screen](https://github.com/samarjeet2010/heart-disease-prediction/blob/main/input.png?raw=true))
 
-![Heart Disease UI Preview](output.png)
 
 ---
 ---
