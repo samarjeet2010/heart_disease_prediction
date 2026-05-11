@@ -111,6 +111,15 @@ Also shows:
 
 ## 📸 UI Preview
 
+
+<img width="1888" height="924" alt="input" src="https://github.com/user-attachments/assets/c241cfb7-ccfa-4720-b674-fd2da44e34b6" />
+
+
+
+
+
+
+
 Simple web interface where users input medical data and get instant prediction.
 ## 📸 UI Preview
 
