@@ -109,9 +109,9 @@ POST http://127.0.0.1:8000/predict
 
 Also shows:
 
-* Random Forest Accuracy
-* Logistic Regression Accuracy
-* Gradient Boosting Accuracy
+* Random Forest Accuracy=83%
+* Logistic Regression Accuracy=73%
+* Gradient Boosting Accuracy=82%
 
 ---
 
